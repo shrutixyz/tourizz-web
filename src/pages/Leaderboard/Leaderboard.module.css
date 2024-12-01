@@ -1,0 +1,25 @@
+.mainbody{
+    padding: 1rem;
+}
+
+.heading{
+    font-size: 1.2rem;
+}
+
+.interGetStarted{
+    color: #92FFBE;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .bottommap{
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    height: auto;
+  }
+  
+.header{
+    display: flex;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
