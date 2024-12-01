@@ -2,9 +2,6 @@ import React, { useState, useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import L from "leaflet";
 import Styles from "./Explore.module.css";
-import queryString from "query-string";
-import { jwtDecode } from "jwt-decode";
-import { useNavigate, useLocation } from "react-router-dom";
 
 // Custom Marker Icon
 const customIcon = L.icon({
@@ -25,31 +22,7 @@ const UpdateMapCenter = ({ position }) => {
 
 const Explore = () => {
   const defaultPosition = [51.505, -0.09]; // London coordinates
-  const [oauthParams, setOauthParams] = useState(null);
   const [userPosition, setUserPosition] = useState(defaultPosition);
-  const [jwtString, setJwtString] = useState("");
-  const [decodedJwt, setDecodedJwt] = useState(null);
-
-  const location = useLocation();
-
-  useEffect(() => {
-    const res = queryString.parse(location.hash);
-    setOauthParams(res);
-  }, [location]);
-
-
-  useEffect(() => {
-    if (oauthParams && oauthParams.id_token) {
-        const decodedJwt = jwtDecode(oauthParams.id_token);
-        setJwtString(oauthParams.id_token);
-        setDecodedJwt(decodedJwt);
-        if (oauthParams?.id_token) {
-            window.localStorage.setItem("jwtString", oauthParams.id_token.toString());
-          } else {
-            console.warn("ID token is missing or undefined.");
-          }
-    }
-}, [oauthParams]);
 
   // Attempt to get user's actual location
   useEffect(() => {

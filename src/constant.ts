@@ -3,7 +3,7 @@ export const FULLNODE_URL = "https://fullnode.devnet.sui.io";
 export const CLIENT_ID =
   "430743287785-cha5efn2qkvppaa3eu7dvvspjp3rel8m.apps.googleusercontent.com"
   
-export const REDIRECT_URI = "http://localhost:3000/explore/";
+export const REDIRECT_URI = "http://localhost:3000/login/";
 
 export const SUI_DEVNET_FAUCET = 'https://faucet.devnet.sui.io/gas'
 
@@ -19,6 +19,7 @@ export const MAX_EPOCH_LOCAL_STORAGE_KEY = "demo_max_epoch_key_pair";
 
 
 export const STEPS_LABELS_TRANS_KEY = ['16e758e8', '9b8b5398', '8adf5b45', '8b72e7cd', '66f6b490', 'af802c7a', 'c649dd70',]
+export const DEVNET_COUNTER_PACKAGE_ID = "0x0a8a95ab66fbe44c2362fd59b6e7852546e4b077961fb42db002ab321ecf3291";
 
 
 export const STEPS_DESC = ['ephemeralKeyPair', '47b83f4e', 'fb399be8', '0a710e64', '32255d31', '8f2433d9']

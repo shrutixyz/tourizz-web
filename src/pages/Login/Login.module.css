@@ -1,52 +1,20 @@
-.mainbody {
-  padding: 1rem;
+.mainbody{
+    padding: 1rem;
 }
 
-.heading {
-  font-size: 1.2rem;
+.heading{
+    font-size: 1.2rem;
 }
 
-.interGetStarted {
-  color: #92ffbe;
-  font-family: "Inter", sans-serif;
-}
-
-.bottommap {
-  position: fixed;
-  bottom: 0;
-  width: 100vw;
-  height: auto;
-}
-
-@media (min-width: 768px) {
-  .bottommap {
-    opacity: 0.1; /* Adjust opacity for laptop screens */
+.interGetStarted{
+    color: #92FFBE;
+    font-family: 'Inter', sans-serif;
   }
-}
-
-.header {
-  font-size: 1.3rem;
-  padding: 1rem;
-}
-
-.headerrow {
-  display: flex;
-  align-items: center;
-}
-
-
-.googleicon{
-  height: 2rem;
-}
-
-.signinbutton{
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  justify-content: center;
-  background-color: black;
-  border: 1px solid white;
-  border-radius: 5rem;
-  width: 20rem;
-  margin: 1rem;
-}
+  
+  .bottommap{
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    height: auto;
+  }
+  
