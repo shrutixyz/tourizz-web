@@ -26,6 +26,7 @@ function MintNFTForm({
   async function mintNFT() {
     const tx = new Transaction();
     tx.setGasBudget(50000000);
+    console.log(name, city, latitude, longitude)
     tx.moveCall({
       target: `${nftPackageId}::nft::mint_tourist_place_nft`,
       arguments: [
@@ -46,7 +47,7 @@ function MintNFTForm({
             options: { showEffects: true },
           });
 
-          // console.log("Transaction effects:", effects);
+          console.log("Transaction effects:", effects);
           onMinted(effects?.created?.[0]?.reference?.objectId!);
         },
         onError: (error) => {
