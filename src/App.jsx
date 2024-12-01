@@ -6,19 +6,16 @@ import Leaderboard from "./pages/Leaderboard/Leaderboard";
 import {
   SuiClientProvider,
   WalletProvider,
-  createNetworkConfig,
+  createNetworkConfig
 } from "@mysten/dapp-kit";
 import { getFullnodeUrl } from "@mysten/sui.js/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 // import i18n from "i18next";
-import ReactDOM from "react-dom/client";
-import { initReactI18next } from "react-i18next";
 import NewLogin from "./pages/Login/NewLogin.tsx";
-import { ConnectButton } from '@mysten/dapp-kit';
 import Profile from "./pages/Profile/Profile.jsx";
 import Transaction from "./pages/Transaction/Transaction.jsx";
-import { CreateCounter } from "./pages/Contract/CreateCounter.tsx";
 import { Counter } from "./pages/Contract/Counter.tsx";
+import TestContract from "./pages/Test/Test.jsx";
 // import { resources } from "./lang/resources";
 
 function App() {
@@ -58,7 +55,7 @@ function App() {
               <Route path="/leaderboard" element={<Leaderboard />} />
               <Route path="/transaction" element={<Transaction />} />
               {/* <Route path="/check" element={<SuiComponent />} /> */}
-              <Route path="/create" element={<CreateCounter />} />
+              <Route path="/create" element={<TestContract/>} />
               <Route path="/counter" element={<Counter />} />
             </Routes>
           </WalletProvider>

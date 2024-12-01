@@ -10,8 +10,9 @@ import {
   import { useNetworkVariable } from "./networkConfigs.ts";
   import React from "react";
   
-  export function Counter({ id }: { id: string }) {
-    const counterPackageId ="0x8234478aaca7b8d366c8c429a0dfb8852e9b53c74c1ca11469cf38a060749cc3";
+  export function Counter({id}: {id: string}) {
+    // const id = "0x2bb966333e93de9e84be96ef78001c797b1feb8988c51d29e6d739962faf398d"
+    const counterPackageId ="0x36f8117d98de9138990ab91b4e9e8c036c7c16ce4be1cfde432fe3c711280b50";
     const suiClient = useSuiClient();
     const currentAccount = useCurrentAccount();
     const { mutate: signAndExecute } = useSignAndExecuteTransaction({
@@ -42,13 +43,16 @@ import {
           arguments: [tx.object(id), tx.pure.u64(0)],
           target: `${counterPackageId}::counter::set_value`,
         });
+        tx.setGasBudget(20000000)
       } else {
         tx.moveCall({
           arguments: [tx.object(id)],
           target: `${counterPackageId}::counter::increment`,
         });
+        tx.setGasBudget(20000000)
       }
   
+      
       signAndExecute(
         {
           transaction: tx,
@@ -90,6 +94,7 @@ import {
     );
   }
   function getCounterFields(data: SuiObjectData) {
+    console.log(data.content)
     if (data.content?.dataType !== "moveObject") {
       return null;
     }
