@@ -17,6 +17,7 @@ import Transaction from "./pages/Transaction/Transaction.jsx";
 import { Counter } from "./pages/Contract/Counter.tsx";
 import TestContract from "./pages/Test/Test.jsx";
 import MintNFTForm from "./pages/Scan/Scan.tsx";
+import Explore from "./pages/Explore/Explore";
 // import { resources } from "./lang/resources";
 
 function App() {
@@ -52,7 +53,7 @@ function App() {
               {/* <Route path="/login" element={<Login />} /> */}
               <Route path="/login" element={<NewLogin />} />
               <Route path="/profile" element={<Profile />} />
-              <Route path="/explore" element={<Landing />} />
+              <Route path="/explore" element={<Explore />} />
               <Route path="/leaderboard" element={<Leaderboard />} />
               <Route path="/transaction" element={<Transaction />} />
               {/* <Route path="/check" element={<SuiComponent />} /> */}
