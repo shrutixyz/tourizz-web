@@ -9,7 +9,7 @@ function MintNFTForm({
 }: {
   onMinted: (id: string) => void;
 }) {
-  const nftPackageId = "0xf178ab747aec8326ee48a9a93c73d27ed5d9d486b48323e97fb33ce2e432372b"; // Replace with your package ID
+  const nftPackageId = "0xefa51db98eeb75db610b71032e45452f36bbf7307d596098b6f63e8e85924677"; // Replace with your package ID
   const suiClient = useSuiClient();
 
   const {
@@ -46,7 +46,7 @@ function MintNFTForm({
             options: { showEffects: true },
           });
 
-          console.log("Transaction effects:", effects);
+          // console.log("Transaction effects:", effects);
           onMinted(effects?.created?.[0]?.reference?.objectId!);
         },
         onError: (error) => {

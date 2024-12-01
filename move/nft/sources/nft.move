@@ -26,5 +26,6 @@ module nft::nft {
         };
         transfer::public_transfer(nft, tx_context::sender(ctx));
     }
+
 }
 

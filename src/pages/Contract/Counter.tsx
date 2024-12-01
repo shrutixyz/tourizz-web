@@ -94,7 +94,7 @@ import {
     );
   }
   function getCounterFields(data: SuiObjectData) {
-    console.log(data.content)
+    // console.log(data.content)
     if (data.content?.dataType !== "moveObject") {
       return null;
     }
