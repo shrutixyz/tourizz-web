@@ -4,6 +4,7 @@ import { Box, Container, Flex, Heading } from "@radix-ui/themes";
 import { useState } from "react";
 import { Counter } from "../Contract/Counter.tsx";
 import { CreateCounter } from "../Contract/CreateCounter.tsx";
+import MintNFTForm from "../Scan/Scan.tsx";
 
 function TestContract() {
   const currentAccount = useCurrentAccount();
@@ -11,6 +12,11 @@ function TestContract() {
   	const hash = window.location.hash.slice(1);
   	return isValidSuiObjectId(hash) ? hash : null;
   });
+
+  const [nft, setNft] = useState(() => {
+    const hash = window.location.hash.slice(1);
+    return isValidSuiObjectId(hash) ? hash : null;
+});
 
   return (
   	<>
@@ -52,7 +58,19 @@ function TestContract() {
   				) : (
   					<Heading>Please connect your wallet</Heading>
   				)}
+
+                
+
   			</Container>
+            <Container>
+                <p>Mint {nft}</p>
+            <MintNFTForm
+  							onMinted={(id) => {
+  								window.location.hash = id;
+  								setNft(id);
+  							}}
+  						/>
+            </Container>
   		</Container>
   	</>
   );
