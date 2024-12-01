@@ -16,6 +16,7 @@ import Profile from "./pages/Profile/Profile.jsx";
 import Transaction from "./pages/Transaction/Transaction.jsx";
 import { Counter } from "./pages/Contract/Counter.tsx";
 import TestContract from "./pages/Test/Test.jsx";
+import MintNFTForm from "./pages/Scan/Scan.jsx";
 // import { resources } from "./lang/resources";
 
 function App() {
@@ -57,6 +58,7 @@ function App() {
               {/* <Route path="/check" element={<SuiComponent />} /> */}
               <Route path="/create" element={<TestContract/>} />
               <Route path="/counter" element={<Counter />} />
+              <Route path="/scan" element={<MintNFTForm />} />
             </Routes>
           </WalletProvider>
         </SuiClientProvider>
