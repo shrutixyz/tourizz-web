@@ -19,6 +19,7 @@ import TestContract from "./pages/Test/Test.jsx";
 import MintNFTForm from "./pages/Scan/Scan.tsx";
 import Explore from "./pages/Explore/Explore";
 import QRScanner from "./components/QRScanner/QRScanner.jsx";
+import ImageGenerator from "./components/ImageGenerator/ImageGenerator.jsx";
 // import { resources } from "./lang/resources";
 
 function App() {
@@ -62,6 +63,8 @@ function App() {
               <Route path="/counter" element={<Counter />} />
               <Route path="/scan" element={<MintNFTForm />} />
               <Route path="/qr" element={<QRScanner />} />
+              <Route path="/image" element={<ImageGenerator />} />
+
 
             </Routes>
           </WalletProvider>
