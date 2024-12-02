@@ -7,11 +7,11 @@ import { getFullnodeUrl } from "@mysten/sui.js/client";
 import "leaflet/dist/leaflet.css";
 import { use } from "i18next";
 
-
 function Explore() {
   const defaultPosition = [51.505, -0.09]; // London coordinates
   const [userPosition, setUserPosition] = useState(defaultPosition);
   const [markerList, setmarkerList] = useState([]);
+  const [displayPopup, setdisplayPopup] = useState(false)
 
   // Custom Marker Icon
   const customIcon = L.icon({
@@ -93,7 +93,7 @@ function Explore() {
       const result = await response.json();
 
       result.result.pop(0);
-      console.log('Object Details:', result.result);
+      console.log("Object Details:", result.result);
 
       setmarkerList(result.result);
     } catch (error) {
@@ -101,12 +101,79 @@ function Explore() {
     }
   }
 
-  useEffect (() => {
-    if (markerList.length > 0)
-    {
-      console.log(markerList[1],markerList[1].data?.content.fields?.latitude)
+  useEffect(() => {
+    if (markerList.length > 0 && userPosition) {
+        const userLocation = userPosition;  // Example: Bangalore
+        const markers = markerList
+                        .map((item) => {
+                          const latitude = item.content?.fields?.latitude;
+                          const longitude = item.content?.fields?.longitude;
+                          return latitude && longitude ? [latitude, longitude] : null; // Add only valid entries
+                        })
+                        .filter((marker) => marker !== null); 
+
+
+        if (isUserWithinRange(userLocation, markers)) {
+          setdisplayPopup(true);
+        } else {
+          setdisplayPopup(false)
+        }
     }
-  }, [markerList])
+  }, [markerList, userPosition]);
+
+  // calculate distance
+  // Haversine formula to calculate distance between two coordinates in km
+  function haversine(lat1, lon1, lat2, lon2) {
+    const R = 6371; // Radius of the Earth in km
+    const dLat = toRad(lat2 - lat1); // Convert latitude difference to radians
+    const dLon = toRad(lon2 - lon1); // Convert longitude difference to radians
+
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(toRad(lat1)) *
+        Math.cos(toRad(lat2)) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
+
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+    return R * c; // Distance in km
+  }
+
+  // Function to convert degrees to radians
+  function toRad(degrees) {
+    return (degrees * Math.PI) / 180;
+  }
+
+  // Function to check if the user is within a 1 km range of any marker
+  function isUserWithinRange(userLocation, markers, rangeKm = 1) {
+    const [userLat, userLon] = userLocation;
+
+    // Loop through the markers and calculate distance
+    for (let i = 0; i < markers.length; i++) {
+      const [markerLat, markerLon] = markers[i];
+      const distance = haversine(userLat, userLon, markerLat, markerLon);
+
+      if (distance <= rangeKm) {
+        return true; // User is within 1 km of a marker
+      }
+    }
+    return false; // No markers within 1 km of the user
+  }
+
+  // Example usage
+  // const userLocation = [12.971598, 77.594566];  // Example: Bangalore
+  // const markers = [
+  //   [12.935242, 77.624874],  // Example: Indiranagar
+  //   [12.919007, 77.586162]   // Example: Jayanagar
+  // ];
+
+  // if (isUserWithinRange(userLocation, markers)) {
+  //   console.log("User is within 1 km range of a marker.");
+  // } else {
+  //   console.log("User is not within 1 km range of any marker.");
+  // }
+
   return (
     <section>
       {markerList.length}
@@ -135,10 +202,11 @@ function Explore() {
             Latitude: {userPosition[0]}, Longitude: {userPosition[1]}
           </Popup>
         </Marker> */}
-        
+
         {markerList &&
           markerList.map((marker) =>
-            marker?.data.content.fields?.latitude && marker?.data.content.fields?.longitude
+            marker?.data.content.fields?.latitude &&
+            marker?.data.content.fields?.longitude
               ? (console.log(marker, "inside"),
                 (
                   <Marker
