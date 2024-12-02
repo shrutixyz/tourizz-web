@@ -1,0 +1,18 @@
+
+.headerimage{
+    height: 2rem;
+    padding: 1rem;
+}
+
+.header{
+    display: flex;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.qrcode{
+    background-color: #92FFBE;
+    padding: 1rem;
+    border: none;
+    border-radius: 0.5rem;
+}

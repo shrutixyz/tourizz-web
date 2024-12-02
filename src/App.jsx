@@ -20,6 +20,7 @@ import MintNFTForm from "./pages/Scan/Scan.tsx";
 import Explore from "./pages/Explore/Explore";
 import QRScanner from "./components/QRScanner/QRScanner.jsx";
 import ImageGenerator from "./components/ImageGenerator/ImageGenerator.jsx";
+import Collectibles from "./pages/Collectibles/Collectibles.jsx";
 // import { resources } from "./lang/resources";
 
 function App() {
@@ -64,7 +65,7 @@ function App() {
               <Route path="/scan" element={<MintNFTForm />} />
               <Route path="/qr" element={<QRScanner />} />
               <Route path="/image" element={<ImageGenerator />} />
-
+              <Route path="/collectibles" element={<Collectibles />} />
 
             </Routes>
           </WalletProvider>

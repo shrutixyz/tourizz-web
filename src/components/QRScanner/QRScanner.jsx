@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Html5Qrcode } from "html5-qrcode";
+import Styles from "./QRScanner.module.css"
+import logo from "../../assets/icons/logo.svg"
+import { useNavigate } from "react-router-dom";
 
 const QRScanner = () => {
   const [devices, setDevices] = useState([]);
@@ -19,13 +22,14 @@ const QRScanner = () => {
         console.error("Error getting cameras:", err);
       });
   }, []);
+  const navigate = useNavigate()
 
   const startScanning = () => {
     if (!selectedDeviceId) {
       alert("No camera selected!");
       return;
     }
-
+   
     const html5QrCode = new Html5Qrcode("reader");
     html5QrCode
       .start(
@@ -36,6 +40,10 @@ const QRScanner = () => {
         },
         (decodedText) => {
           setScannedData(decodedText); // Handle the scanned data
+          if(decodedText.startsWith("nft:")){
+            window.localStorage.setItem("currentNFT", decodedText);
+            navigate('/scan')
+          }
         },
         (error) => {
           console.warn("QR Code scan error:", error);
@@ -53,7 +61,11 @@ const QRScanner = () => {
 
   return (
     <div>
-      <h1>QR Code Scanner with Camera Selection</h1>
+
+        <div className={Styles.header}>
+            <img src={logo} className={Styles.headerimage} alt="" />
+            <p>SCAN</p>
+        </div>
 
       {/* Camera selection dropdown */}
       <div>
@@ -72,15 +84,16 @@ const QRScanner = () => {
       </div>
 
       {/* Start scanning button */}
-      <button onClick={startScanning} style={{ margin: "10px", padding: "10px" }}>
+      <center><button onClick={startScanning} className={Styles.qrcode} style={{ margin: "10px", padding: "10px" }}>
         Start Scanning
-      </button>
+      </button></center>
 
       {/* QR Code scanner view */}
       <div id="reader" style={{ width: "500px", margin: "20px auto" }}></div>
 
       {/* Scanned result */}
-      <p>Scanned Data: {scannedData}</p>
+      <center><strong><p>Align QR</p></strong></center>
+      <center><p>Status: {scannedData}</p></center>
     </div>
   );
 };

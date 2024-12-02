@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import { useSignAndExecuteTransaction, useSuiClient, ConnectButton } from "@mysten/dapp-kit";
 import { Container, Button } from "@radix-ui/themes";
 import ClipLoader from "react-spinners/ClipLoader";
+import money from "../../assets/images/coin.svg"
+import Styles from "./Scan.module.css"
+import { useNavigate } from "react-router-dom";
 
 function MintNFTForm({
   onMinted,
@@ -18,7 +21,7 @@ function MintNFTForm({
     isPending,
   } = useSignAndExecuteTransaction();
 
-  const [name, setName] = useState("");
+  const [valueArrname, setName] = useState("");
   const [city, setCity] = useState("");
   const [latitude, setLatitude] = useState("0");
   const [longitude, setLongitude] = useState("0");
@@ -26,14 +29,16 @@ function MintNFTForm({
   async function mintNFT() {
     const tx = new Transaction();
     tx.setGasBudget(50000000);
-    console.log(name, city, latitude, longitude)
+    const values =  localStorage.getItem("currentNFT")??"";
+    const valueArr = values?.split(":")
+    // console.log(valueArr[1], valueArr[2], valueArr[3], valueArr[4])
     tx.moveCall({
       target: `${nftPackageId}::nft::mint_tourist_place_nft`,
       arguments: [
-        tx.pure.string(name),
-        tx.pure.string(city),
-        tx.pure.string(latitude),
-        tx.pure.string(longitude),
+        tx.pure.string(valueArr[1] !== undefined ? valueArr[1] : ""),
+        tx.pure.string(valueArr[2] !== undefined ? valueArr[2] : ""),
+        tx.pure.string(valueArr[3] !== undefined ? valueArr[3] : ""),
+        tx.pure.string(valueArr[4] !== undefined ? valueArr[4] : "")
       ],
     });
 
@@ -61,11 +66,19 @@ function MintNFTForm({
     event.preventDefault();
     mintNFT();
   };
+  const navigate = useNavigate()
 
   return (
+    
     <Container>
+      <div className={Styles.mainbody}>
+      <img src={money} alt="" />
+      <p>Woohoo!! Collectible added into your vault</p>
+      <p className={Styles.inter} onClick={()=>navigate('/collectibles')}>{"View it here -->"}</p>
+      </div>
+
       {/* <ConnectButton /> */}
-      <form onSubmit={handleSubmit}>
+      {/* <form onSubmit={handleSubmit}>
         <input
           type="text"
           value={name}
@@ -97,7 +110,7 @@ function MintNFTForm({
         >
           {isSuccess || isPending ? <ClipLoader size={20} /> : "Mint NFT"}
         </Button>
-      </form>
+      </form> */}
     </Container>
   );
 }

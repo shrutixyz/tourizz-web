@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 const ImageGenerator = () => {
   // Reference to the canvas element
@@ -72,21 +72,17 @@ const ImageGenerator = () => {
     link.click(); // Trigger the download
   };
 
+  useEffect(()=>{
+    generateRandomImage();
+  }, [])
+
   return (
-    <div style={{ textAlign: 'center' }}>
-      <h1>Random Abstract Image Generator</h1>
-      <canvas
+     <canvas
         ref={canvasRef}
         width="500"
         height="500"
-        style={{ border: '1px solid black', marginBottom: '20px' }}
+        style={{ border: '1px solid black', marginBottom: '20px', backgroundColor: "#F7F7F7", height: "10rem"}}
       ></canvas>
-      <br />
-      <button onClick={generateRandomImage}>Generate Random Image</button>
-      <button onClick={downloadImage} style={{ marginLeft: '10px' }}>
-        Download Image
-      </button>
-    </div>
   );
 };
 

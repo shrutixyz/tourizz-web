@@ -4,7 +4,7 @@ import { Button, Typography, Stack, Alert } from "@mui/material";
 import { generateRandomness } from "@mysten/zklogin";
 import Styles from "./Profile.module.css"
 import logo from "../../assets/icons/logo.svg"
-import { ConnectButton, useCurrentAccount } from '@mysten/dapp-kit';
+import { ConnectButton, useCurrentAccount, useSuiClientQuery } from '@mysten/dapp-kit';
 
 import pfp from "../../assets/images/pfp.svg"
 import {
@@ -22,6 +22,7 @@ import {
 import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
+    const [collectibles, setCollectibles] = useState(0)
     const account = useCurrentAccount();
   const jwtString = window.localStorage.getItem("jwtString");
   const [userSalt, setUserSalt] = useState();
@@ -44,6 +45,19 @@ const navigate = useNavigate()
     window.localStorage.removeItem("jwtString")
     navigate('/')
   }
+
+  const { data, isLoading, error } = useSuiClientQuery("getOwnedObjects", {
+    owner: address,
+    showContent: true,
+    showOwner: true,
+  });
+
+  useEffect(()=> {
+    if (data) {
+        setCollectibles(data.length==null?0:data.length)
+    }
+  }, [data])
+
   return (
     <main>
       <div className={Styles.header}>
@@ -60,7 +74,7 @@ const navigate = useNavigate()
         <p className={Styles.verify} onClick={generateUserSalt}>Verify Account</p>
 
         <div className={Styles.collectibles}>
-            <p className={Styles.number}>34</p>
+            <p className={Styles.number}>{collectibles}</p>
             <p className={Styles.subtitles}>Collectibles Grabbed</p>
         </div>
       </div>

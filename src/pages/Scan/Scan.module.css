@@ -1,0 +1,17 @@
+
+
+.inter{
+    color: #92FFBE;
+    font-family: 'Inter', sans-serif;
+  }
+
+.mainbody{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-direction: column;
+    cursor: pointer;
+}
