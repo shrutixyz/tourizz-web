@@ -7,6 +7,10 @@ import { generateNonce, generateRandomness } from "@mysten/zklogin";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import queryString from "query-string";
+import { useSignAndExecuteTransaction, useSuiClient, ConnectButton } from "@mysten/dapp-kit";
+import Styles from "./Login.module.css"
+import logo from "../../assets/icons/logo.svg"
+import googleimg from "../../assets/icons/google.png"
 import {
     CLIENT_ID,
     FULLNODE_URL,
@@ -29,6 +33,14 @@ const NewLogin = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
+
+    useEffect(() => {
+      const jwtString = localStorage.getItem("jwtString");
+      if (jwtString) {
+        navigate("/explore");
+      }
+    }, [navigate]);
+
     useEffect(() => {
         const res = queryString.parse(location.hash);
         setOauthParams(res);
@@ -47,9 +59,13 @@ const NewLogin = () => {
         }
     }, [oauthParams]);
 
-    const createEphemeralKeyPair = () => {
+    const fullLogin = async () =>{
+        await createEphemeralKeyPair()
+        await generateNonceAndLogin()
+    }
+    const createEphemeralKeyPair = async () => {
         const keyPair = Ed25519Keypair.generate();
-        setEphemeralKeyPair(keyPair);
+       await setEphemeralKeyPair(keyPair);
         window.sessionStorage.setItem(KEY_PAIR_SESSION_STORAGE_KEY, keyPair.export().privateKey);
         console.log( keyPair.export().privateKey)
     };
@@ -72,15 +88,18 @@ const NewLogin = () => {
     };
 
     return (
-        <Stack spacing={2}>
-            <Typography variant="h5">Login Segment</Typography>
-            <Button variant="contained" onClick={createEphemeralKeyPair}>
-                Create Ephemeral KeyPair
-            </Button>
-            <Button variant="contained" disabled={!ephemeralKeyPair} onClick={generateNonceAndLogin}>
-                Sign In With Google
-            </Button>
-        </Stack>
+       <main>
+        <div className={Styles.header}>
+            <img src={logo} alt="" className={Styles.headerimage} />
+            <h1 className={Styles.login}>Login</h1>
+        </div>
+
+        <div className={Styles.loginbutton} onClick={fullLogin}>
+            <img src={googleimg} className={Styles.googleimg} alt="" />
+            <p>Login with Google (ZK Login)</p>
+        </div>
+        
+       </main>
     );
 };
 

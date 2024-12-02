@@ -1,20 +1,54 @@
-.mainbody{
-    padding: 1rem;
+.mainbody {
+  padding: 1rem;
 }
 
-.heading{
-    font-size: 1.2rem;
+.heading {
+  font-size: 1.2rem;
 }
 
-.interGetStarted{
-    color: #92FFBE;
-    font-family: 'Inter', sans-serif;
-  }
-  
-  .bottommap{
-    position: fixed;
-    bottom: 0;
-    width: 100vw;
-    height: auto;
-  }
-  
+.interGetStarted {
+  color: #92ffbe;
+  font-family: "Inter", sans-serif;
+}
+
+.bottommap {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  height: auto;
+}
+
+.connect {
+  color: red !important;
+}
+
+.headerimage {
+  height: 2rem;
+  margin: 1rem;
+}
+
+.header {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.login {
+  font-size: 1.5rem;
+}
+
+.googleimg {
+  height: 2rem;
+}
+
+.loginbutton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem;
+  border: 1px solid white;
+  border-radius: 5rem;
+  width: 20rem;
+  gap: 1rem;
+  cursor: pointer;
+}

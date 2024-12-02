@@ -5,6 +5,7 @@
   bottom: 0;
   width: 100vw;
   height: auto;
+  z-index: -1;
 }
 
 .heading{
@@ -25,4 +26,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.interGetStarted{
+  cursor: pointer;
 }

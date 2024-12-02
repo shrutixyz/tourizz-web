@@ -23,6 +23,7 @@
     "axios": "^1.6.1",
     "bignumber.js": "^9.1.2",
     "buffer": "^6.0.3",
+    "html5-qrcode": "^2.2.7",
     "i18next": "^23.7.6",
     "jwt-decode": "^4.0.0",
     "leaflet": "^1.9.4",
