@@ -10,6 +10,7 @@ import { Counter } from "../Contract/Counter.tsx";
 import { CreateCounter } from "../Contract/CreateCounter.tsx";
 import MintNFTForm from "../Scan/Scan.tsx";
 import { getFullnodeUrl } from "@mysten/sui.js/client";
+// import CustomisableLoginButton from '../../components/CustomisableLoginButton.jsx'
 
 function TestContract() {
   const currentAccount = useCurrentAccount();
@@ -79,6 +80,7 @@ function TestContract() {
 
   return (
     <>
+      {/* <CustomisableLoginButton/> */}
       <Flex
         position="sticky"
         px="4"

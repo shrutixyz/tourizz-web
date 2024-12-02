@@ -5,7 +5,7 @@ import { useNetworkVariable } from "./networkConfigs.ts";
 import ClipLoader from "react-spinners/ClipLoader";
 import React from "react";
 import { error } from "console";
-
+import Styles from './Counter.module.css'
 export function CreateCounter({
   onCreated,
 }: {
@@ -60,7 +60,9 @@ export function CreateCounter({
 
   return (
     <Container>
-       <ConnectButton />
+       <ConnectButton style={{
+        backgroundColor: "red"
+       }}/>
       <Button
         size="3"
         onClick={() => {

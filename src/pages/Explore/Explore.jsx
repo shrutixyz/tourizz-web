@@ -5,6 +5,7 @@ import Styles from "./Explore.module.css";
 import { useSuiClientQuery } from "@mysten/dapp-kit";
 import { getFullnodeUrl } from "@mysten/sui.js/client";
 import "leaflet/dist/leaflet.css";
+import { use } from "i18next";
 
 
 function Explore() {
@@ -92,15 +93,23 @@ function Explore() {
       const result = await response.json();
 
       result.result.pop(0);
-      // console.log('Object Details:', result.result);
+      console.log('Object Details:', result.result);
 
       setmarkerList(result.result);
     } catch (error) {
       console.error("Error fetching object details:", error);
     }
   }
+
+  useEffect (() => {
+    if (markerList.length > 0)
+    {
+      console.log(markerList[1],markerList[1].data?.content.fields?.latitude)
+    }
+  }, [markerList])
   return (
     <section>
+      {markerList.length}
       <div className={Styles.titleBar}>
         <div className={Styles.titleLeft}>Home</div>
       </div>
@@ -119,27 +128,28 @@ function Explore() {
         />
 
         {/* Marker with Custom Icon */}
-        <Marker position={userPosition} icon={customIcon}>
+        {/* <Marker position={userPosition} icon={customIcon}>
           <Popup>
             You are here!
             <br />
             Latitude: {userPosition[0]}, Longitude: {userPosition[1]}
           </Popup>
-        </Marker>
+        </Marker> */}
+        
         {markerList &&
           markerList.map((marker) =>
-            marker?.data.fields?.latitude && marker?.data.fields?.longitude
+            marker?.data.content.fields?.latitude && marker?.data.content.fields?.longitude
               ? (console.log(marker, "inside"),
                 (
                   <Marker
-                    key={marker?.data.fields?.id} // Ensure you provide a unique key for each marker
+                    key={marker?.data.content.fields?.id} // Ensure you provide a unique key for each marker
                     position={[
-                      marker?.data.fields?.latitude,
-                      marker?.data.fields?.longitude,
+                      marker?.data.content.fields?.latitude,
+                      marker?.data.content.fields?.longitude,
                     ]}
                     icon={customIcon}
                   >
-                    <Popup>{marker?.data.fields?.name}</Popup>
+                    <Popup>{marker?.data.content.fields?.name}</Popup>
                     <p>hello</p>
                   </Marker>
                 ))
