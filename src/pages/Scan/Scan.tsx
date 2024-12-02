@@ -9,7 +9,7 @@ function MintNFTForm({
 }: {
   onMinted: (id: string) => void;
 }) {
-  const nftPackageId = "0xefa51db98eeb75db610b71032e45452f36bbf7307d596098b6f63e8e85924677"; // Replace with your package ID
+  const nftPackageId = "0x4633ccd8345f2cdabd4a0ca029dca82c70025c46a57ce2b5c6c963c51078ae41"; // Replace with your package ID
   const suiClient = useSuiClient();
 
   const {

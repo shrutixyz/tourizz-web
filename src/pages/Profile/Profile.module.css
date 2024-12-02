@@ -1,0 +1,88 @@
+.mainbody{
+    padding: 1rem;
+}
+
+.heading{
+    font-size: 1.2rem;
+}
+
+.interGetStarted{
+    color: #92FFBE;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .bottommap{
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    height: auto;
+  }
+  
+.header{
+    display: flex;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.Leaderboard{
+  line-height: 2rem;
+  font-size: 1.2rem;
+}
+
+.pfp{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4rem;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.address{
+    height: 2rem;
+    min-width: 15rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 5rem;
+    background-color: #92FFBE10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.verify{
+    color: #92FFBE;
+    cursor: pointer;
+    margin-top: -1rem;
+}
+
+.collectibles{
+    background-color: #92FFBE;
+    height: 6rem;
+    width: 12rem;
+    border-radius: 0.5rem;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.number{
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: -1rem;
+    /* margin-top: -0.1rem; */
+}
+
+.subtitles{
+    color: black;
+}
+.interGetStarted{
+    color: #92FFBE;
+    font-family: 'Inter', sans-serif;
+    float: right;
+    margin: 5rem;
+    cursor: pointer;
+  }

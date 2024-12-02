@@ -6,15 +6,15 @@ module nft::nft {
         id: UID,
         name: String,
         city: String,
-        latitude: u32,
-        longitude: u32,
+        latitude: u64,
+        longitude: u64,
     }
 
     public fun mint_tourist_place_nft (
         name: vector<u8>,
         city: vector<u8>,
-        latitude: u32,
-        longitude: u32,
+        latitude: u64,
+        longitude: u64,
         ctx: &mut TxContext,
     ) {
         let nft = TouristPlaceNFT {
@@ -26,5 +26,6 @@ module nft::nft {
         };
         transfer::public_transfer(nft, tx_context::sender(ctx));
     }
+
 }
 
