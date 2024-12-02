@@ -9,7 +9,7 @@ function MintNFTForm({
 }: {
   onMinted: (id: string) => void;
 }) {
-  const nftPackageId = "0x4633ccd8345f2cdabd4a0ca029dca82c70025c46a57ce2b5c6c963c51078ae41"; // Replace with your package ID
+  const nftPackageId = "0xda5f593df36c5e92b0d243f437ce27261175039aa768b9ff8640dba213a0382c"; // Replace with your package ID
   const suiClient = useSuiClient();
 
   const {
@@ -20,8 +20,8 @@ function MintNFTForm({
 
   const [name, setName] = useState("");
   const [city, setCity] = useState("");
-  const [latitude, setLatitude] = useState(0);
-  const [longitude, setLongitude] = useState(0);
+  const [latitude, setLatitude] = useState("0");
+  const [longitude, setLongitude] = useState("0");
 
   async function mintNFT() {
     const tx = new Transaction();
@@ -32,8 +32,8 @@ function MintNFTForm({
       arguments: [
         tx.pure.string(name),
         tx.pure.string(city),
-        tx.pure.u32(latitude),
-        tx.pure.u32(longitude),
+        tx.pure.string(latitude),
+        tx.pure.string(longitude),
       ],
     });
 
@@ -81,13 +81,13 @@ function MintNFTForm({
         <input
           type="number"
           value={latitude}
-          onChange={(e) => setLatitude(Number(e.target.value))}
+          onChange={(e) => setLatitude(e.target.value)}
           placeholder="Latitude"
         />
         <input
           type="number"
           value={longitude}
-          onChange={(e) => setLongitude(Number(e.target.value))}
+          onChange={(e) => setLongitude(e.target.value)}
           placeholder="Longitude"
         />
         <Button
