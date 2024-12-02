@@ -9,22 +9,22 @@ const Collectibles = () =>{
     const [collectibles, setCollectibles] = useState([])
 
 
-      const [address, setAddress] = useState("")
   const { data, isLoading, error } = useSuiClientQuery("getOwnedObjects", {
-    owner: address,
+    owner: window.location.href.split("=")[1],
     showContent: true,
     showOwner: true,
   });
 
   useEffect(()=> {
+    console.log(data?.data)
     if (data) {
-        setCollectibles(data.length==null?[]:data)
+        setCollectibles(data?.data.length==null?[]:data?.data)
     }
   }, [data])
 
   useEffect(()=>{
     if(account){
-        setAddress(account.address);
+        // setAddress(account.address);
     }
     
   }, [account])
@@ -41,7 +41,10 @@ const Collectibles = () =>{
         Your Collectibles
     </p>
     {collectibles.map((item, index) => (
-         <ImageGenerator/>
+         <div>
+            <ImageGenerator/>
+            <p style={{"fontSize": "0.9rem"}}> {item?.data?.objectId}</p>
+         </div>
         ))}
     </div>
 </main>

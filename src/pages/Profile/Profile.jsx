@@ -54,7 +54,7 @@ const navigate = useNavigate()
 
   useEffect(()=> {
     if (data) {
-        setCollectibles(data.length==null?0:data.length)
+        setCollectibles(data?.data.length==null?0:data?.data.length)
     }
   }, [data])
 

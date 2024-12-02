@@ -1,17 +1,13 @@
 import { Transaction } from "@mysten/sui/transactions";
-import React, { useState } from "react";
-import { useSignAndExecuteTransaction, useSuiClient, ConnectButton } from "@mysten/dapp-kit";
+import React, { useEffect, useState } from "react";
+import { useSignAndExecuteTransaction, useSuiClient, ConnectButton, useCurrentAccount } from "@mysten/dapp-kit";
 import { Container, Button } from "@radix-ui/themes";
 import ClipLoader from "react-spinners/ClipLoader";
 import money from "../../assets/images/coin.svg"
 import Styles from "./Scan.module.css"
 import { useNavigate } from "react-router-dom";
 
-function MintNFTForm({
-  onMinted,
-}: {
-  onMinted: (id: string) => void;
-}) {
+function MintNFTForm() {
   const nftPackageId = "0x71c12c0d62334ea07b6758a50d7812327b596626e9e46ca9f118ac7ef68c9623"; // Replace with your package ID
   const suiClient = useSuiClient();
 
@@ -26,6 +22,18 @@ function MintNFTForm({
   const [city, setCity] = useState("");
   const [latitude, setLatitude] = useState("0");
   const [longitude, setLongitude] = useState("0");
+
+  useEffect(() => {
+    mintNFT();
+  }, [])
+
+  const [add, setAdd] = useState("")
+  const account = useCurrentAccount();
+  useEffect(()=>{
+    if(account){
+      setAdd(account?.address);
+    }
+  }, [account])
 
   async function mintNFT() {
     const tx = new Transaction();
@@ -42,8 +50,7 @@ function MintNFTForm({
         tx.pure.string(valueArr[4] !== undefined ? valueArr[4] : "")
       ],
     });
-
-
+   
     signAndExecute(
       { transaction: tx },
       {
@@ -54,7 +61,7 @@ function MintNFTForm({
           });
 
           console.log("Transaction effects:", effects);
-          onMinted(effects?.created?.[0]?.reference?.objectId!);
+          // onMinted(effects?.created?.[0]?.reference?.objectId!);
         },
         onError: (error) => {
           console.error("Minting NFT failed:", error);
@@ -65,6 +72,7 @@ function MintNFTForm({
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
+    console.log("submit")
     mintNFT();
   };
   const navigate = useNavigate()
@@ -75,7 +83,10 @@ function MintNFTForm({
       <div className={Styles.mainbody}>
       <img src={money} alt="" />
       <p>Woohoo!! Collectible added into your vault</p>
-      <p className={Styles.inter} onClick={()=>navigate('/collectibles')}>{"View it here -->"}</p>
+      <p className={Styles.inter} onClick={()=>{
+        
+        window.location.href=`/collectibles?address=${add}`
+      }}>{"View it here -->"}</p>
       </div>
 
       {/* <ConnectButton /> */}
