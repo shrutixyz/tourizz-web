@@ -5,3 +5,33 @@ section {
     align-items: center;
     max-height: 100vh;
 }
+
+.popup{
+    background-color: #92FFBE;
+    color: black;
+    text-align: center;
+    font-size: 0.9rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    position: fixed;
+    z-index: 1000;
+    top: 1rem;
+}
+
+.scan{
+    background-color: #92FFBE;
+    color: black;
+    text-align: center;
+    font-size: 0.9rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    position: fixed;
+    z-index: 1000;
+    bottom: 1rem;
+}
+
+.section{
+    position: relative;
+}

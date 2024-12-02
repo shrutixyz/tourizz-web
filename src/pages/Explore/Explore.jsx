@@ -6,13 +6,15 @@ import { useSuiClientQuery } from "@mysten/dapp-kit";
 import { getFullnodeUrl } from "@mysten/sui.js/client";
 import "leaflet/dist/leaflet.css";
 import { use } from "i18next";
+import { useNavigate } from "react-router-dom";
 
 function Explore() {
   const defaultPosition = [51.505, -0.09]; // London coordinates
   const [userPosition, setUserPosition] = useState(defaultPosition);
   const [markerList, setmarkerList] = useState([]);
   const [displayPopup, setdisplayPopup] = useState(false)
-
+  const [withinRange, setWithinRange] = useState(false);
+  const navigate = useNavigate()
   // Custom Marker Icon
   const customIcon = L.icon({
     iconUrl: "https://cdn-icons-png.flaticon.com/512/854/854878.png", // URL to your custom marker image
@@ -29,6 +31,11 @@ function Explore() {
     }, [map, position]);
     return null;
   };
+
+  useEffect(()=>{
+    console.log("change")
+    console.log(withinRange)
+  }, [withinRange])
 
   // Attempt to get user's actual location
   useEffect(() => {
@@ -155,9 +162,11 @@ function Explore() {
       const distance = haversine(userLat, userLon, markerLat, markerLon);
 
       if (distance <= rangeKm) {
+        setWithinRange(true)
         return true; // User is within 1 km of a marker
       }
     }
+    setWithinRange(false)
     return false; // No markers within 1 km of the user
   }
 
@@ -175,10 +184,10 @@ function Explore() {
   // }
 
   return (
-    <section>
-      {markerList.length}
+    <section className={Styles.section}>
+      {/* {markerList.length} */}
       <div className={Styles.titleBar}>
-        <div className={Styles.titleLeft}>Home</div>
+        {/* <div className={Styles.titleLeft}>Home</div> */}
       </div>
       <MapContainer
         center={defaultPosition}
@@ -224,6 +233,12 @@ function Explore() {
               : null
           )}
       </MapContainer>
+      <div className={Styles.popup} style={{"display": withinRange?"block": "block"}}>
+          <p>NOTE: You are within range to scan your next collectible!</p>
+      </div>
+      <div className={Styles.scan} style={{"display": withinRange?"block": "block"}} onClick={()=>navigate('/qr')}>
+          <p>Scan QR [ ]</p>
+      </div>
     </section>
   );
 }
