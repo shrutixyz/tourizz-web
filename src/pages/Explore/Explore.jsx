@@ -4,6 +4,8 @@ import L from "leaflet";
 import Styles from "./Explore.module.css";
 import { useSuiClientQuery } from "@mysten/dapp-kit";
 import { getFullnodeUrl } from "@mysten/sui.js/client";
+import "leaflet/dist/leaflet.css";
+
 
 function Explore() {
   const defaultPosition = [51.505, -0.09]; // London coordinates

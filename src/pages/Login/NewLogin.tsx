@@ -61,13 +61,14 @@ const NewLogin = () => {
 
     const fullLogin = async () =>{
         await createEphemeralKeyPair()
-        await generateNonceAndLogin()
+        
     }
     const createEphemeralKeyPair = async () => {
         const keyPair = Ed25519Keypair.generate();
        await setEphemeralKeyPair(keyPair);
-        window.sessionStorage.setItem(KEY_PAIR_SESSION_STORAGE_KEY, keyPair.export().privateKey);
+       await window.sessionStorage.setItem(KEY_PAIR_SESSION_STORAGE_KEY, keyPair.export().privateKey);
         console.log( keyPair.export().privateKey)
+        await generateNonceAndLogin()
     };
 
     const generateNonceAndLogin = async () => {
