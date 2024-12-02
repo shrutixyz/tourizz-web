@@ -6,15 +6,15 @@ module nft::nft {
         id: UID,
         name: String,
         city: String,
-        latitude: u64,
-        longitude: u64,
+        latitude: String,
+        longitude: String,
     }
 
     public fun mint_tourist_place_nft (
         name: vector<u8>,
         city: vector<u8>,
-        latitude: u64,
-        longitude: u64,
+        latitude: String,
+        longitude: String,
         ctx: &mut TxContext,
     ) {
         let nft = TouristPlaceNFT {

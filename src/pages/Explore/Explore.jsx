@@ -113,8 +113,8 @@ function Explore() {
         const userLocation = userPosition;  // Example: Bangalore
         const markers = markerList
                         .map((item) => {
-                          const latitude = item.content?.fields?.latitude;
-                          const longitude = item.content?.fields?.longitude;
+                          const latitude = Number(item.content?.fields?.latitude);
+                          const longitude = Number(item.content?.fields?.longitude);
                           return latitude && longitude ? [latitude, longitude] : null; // Add only valid entries
                         })
                         .filter((marker) => marker !== null); 

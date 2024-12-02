@@ -12,7 +12,7 @@ function MintNFTForm({
 }: {
   onMinted: (id: string) => void;
 }) {
-  const nftPackageId = "0xda5f593df36c5e92b0d243f437ce27261175039aa768b9ff8640dba213a0382c"; // Replace with your package ID
+  const nftPackageId = "0x71c12c0d62334ea07b6758a50d7812327b596626e9e46ca9f118ac7ef68c9623"; // Replace with your package ID
   const suiClient = useSuiClient();
 
   const {
@@ -21,7 +21,8 @@ function MintNFTForm({
     isPending,
   } = useSignAndExecuteTransaction();
 
-  const [valueArrname, setName] = useState("");
+  // const [valueArrname, setName] = useState("");
+  const [name, setName] = useState("");
   const [city, setCity] = useState("");
   const [latitude, setLatitude] = useState("0");
   const [longitude, setLongitude] = useState("0");
@@ -78,7 +79,7 @@ function MintNFTForm({
       </div>
 
       {/* <ConnectButton /> */}
-      {/* <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           value={name}
@@ -110,7 +111,7 @@ function MintNFTForm({
         >
           {isSuccess || isPending ? <ClipLoader size={20} /> : "Mint NFT"}
         </Button>
-      </form> */}
+      </form>
     </Container>
   );
 }
